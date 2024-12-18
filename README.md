@@ -9,20 +9,14 @@
 │   ├── external       <- Data from third party sources
 │   ├── processed      <- The final, canonical data sets for modeling
 │
-│
 ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`
-│
-│
 │
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
 │
 └── src                         <- Source code for this project
-    │
-    │
-    │
     │
     │
       ├── app.py               <- Main application script
