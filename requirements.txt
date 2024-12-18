@@ -1,0 +1,7 @@
+ipykernel
+python-dotenv
+pandas
+numpy
+scikit-learn
+flask
+
