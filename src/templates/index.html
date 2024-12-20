@@ -1,110 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Game Recommendation System</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-[#171a21] text-[#66c0f4] font-roboto">
-    <nav class="p-6 flex justify-between items-center bg-[#171a21]">
-      <a href="/" class="text-[#66c0f4] text-3xl font-bold font-montserrat">
-        Game Recommendation System
-      </a>
-    </nav>
+{% include 'header.html' %}
 
-    <div class="container mx-auto px-6 mt-12">
-      <!-- Recommendation Form -->
-      <div class="max-w-lg mx-auto p-6 bg-[#1b2838] rounded-lg shadow-lg mb-16">
-        <h1
-          class="text-4xl font-bold mb-6 font-montserrat text-center text-[#66c0f4]"
-        >
-          Recommend a Game
-        </h1>
-        <form action="/" method="post">
-          <label for="user_input" class="block text-[#66c0f4] mb-3 text-xl">
-            Enter Game Title:
-          </label>
-          <input
-            id="user_input"
-            name="user_input"
-            type="text"
-            class="w-full p-3 rounded border border-gray-700 bg-[#2a475e] text-[#c7d5e0] mb-6"
-            placeholder="Enter game title"
-          />
-          <input
-            type="submit"
-            value="Submit"
-            class="w-full p-4 bg-[#66c0f4] text-[#1b2838] rounded font-bold cursor-pointer hover:bg-[#4a90e2] transition duration-300"
-          />
-        </form>
+<header class="text-center py-20 bg-cover bg-center hero-section">
+  <h1 class="text-5xl font-extrabold text-[#ffffff] drop-shadow-lg">
+    Discover Your Next Favorite Game
+  </h1>
+  <p class="mt-6 text-xl text-gray-300">
+    Personalized recommendations and top-rated games at your fingertips.
+  </p>
+</header>
+
+<!-- Recommendation Form -->
+<section id="recommend" class="container mx-auto px-6 py-2">
+  <div class="max-w-3xl mx-auto p-10 bg-gradient-to-br from-[#1e293b] to-[#0f172a] rounded-lg shadow-xl">
+    <h2 class="text-4xl font-extrabold text-center text-[#66c0f4] mb-8">
+      Recommend a Game
+    </h2>
+    <form action="/" method="post" class="space-y-6">
+      <!-- Game Title Input -->
+      <div>
+        <label for="user_input" class="block text-xl font-semibold text-[#c9d1d9] mb-2">
+          Enter a Game Title:
+        </label>
+        <input
+          id="user_input"
+          name="user_input"
+          type="text"
+          class="w-full p-4 rounded-lg border-2 border-gray-700 bg-[#2a475e] text-[#c9d1d9] placeholder-gray-400 focus:ring-2 focus:ring-[#66c0f4] focus:outline-none transition"
+          placeholder="E.g.,  The Witcher 3, Elden Ring"
+        />
       </div>
+      <!-- Submit Button -->
+      <div>
+        <button
+          type="submit"
+          class="w-full py-4 bg-[#66c0f4] text-[#161b22] font-bold rounded-lg text-lg hover:bg-[#4a90e2] shadow-lg transition-transform transform hover:scale-105"
+        >
+          Get Recommendations
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
 
-      <!-- Display Recommended Games -->
-      {% if data %}
-      <h1 class="text-5xl font-bold mb-10 font-montserrat text-[#66c0f4]">
-        Recommended Games
-      </h1>
+<!-- Recommended Games -->
+{% if data %}
+<section class="container mx-auto px-6 py-8">
+  <h2 class="text-4xl font-bold text-center text-[#66c0f4] mb-12">
+    Recommended Games
+  </h2>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+  >
+    {% for i in data %}
+    <div
+      class="group relative bg-[#2a475e] rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img
+        class="w-full h-48 object-cover"
+        src="{{i[4]}}"
+        alt="Game Image"
+      />
       <div
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8"
-      >
-        {% for i in data %}
-        <div
-          class="bg-[#2a475e] rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105"
+        class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+      ></div>
+      <div class="p-4 relative z-10 text-center">
+        <h3
+          class="text-xl font-bold text-[#c7d5e0] group-hover:text-[#66c0f4]"
         >
-          <!-- <div class="aspect-w-3 aspect-h-4">
-            <img
-              class="w-full h-full object-cover"
-              src="{{i[2]}}"
-              alt="Game Image"
-            />
-          </div> -->
-          <div class="p-4 text-center bg-[#1b2838]">
-            <p class="text-[#c7d5e0] font-semibold">{{i[0]}}</p>
-            <h4 class="text-[#8f98a0]">{{i[1]}}</h4>
-            <h4 class="text-[#8f98a0]">Positive Ratio - {{i[2]}}</h4>
-            <h4 class="text-[#8f98a0]">Price - ${{i[3]}}</h4>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-
-      <!-- Top 50 Games -->
-      <div class="mt-16">
-        <h1 class="text-5xl font-bold mb-10 font-montserrat text-[#66c0f4]">
-          Top 50 Games
-        </h1>
-        <div
-          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8"
-        >
-          {% for i in range(game_title|length) %}
-          <div
-            class="bg-[#2a475e] rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105"
-          >
-            <!-- <div class="aspect-w-3 aspect-h-4">
-              <img
-                class="w-full h-full object-cover"
-                src="{{ image[i] }}"
-                alt="Game Image"
-              />
-            </div> -->
-            <div class="p-4 text-center bg-[#1b2838]">
-              <p class="text-[#c7d5e0] font-semibold">{{ game_title[i] }}</p>
-              <h4 class="text-[#8f98a0]">{{ game_date_release[i] }}</h4>
-              <h4 class="text-[#8f98a0]">
-                Positive Ratio - {{ game_score[i] }}
-              </h4>
-              <h4 class="text-[#8f98a0]">Price - ${{ game_price[i] }}</h4>
-            </div>
-          </div>
-          {% endfor %}
+          {{i[0]}}
+        </h3>
+        <p class="text-sm text-gray-400">{{i[1]}}</p>
+        <div class="mt-4">
+          <p class="text-sm">
+            User Approval:
+            <span class="font-bold text-[#66c0f4]">{{i[2]}}%</span>
+          </p>
+          <p class="text-sm">
+            Price: <span class="font-bold text-[#66c0f4]">${{i[3]}}</span>
+          </p>
         </div>
       </div>
     </div>
-  </body>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- Top Games -->
+<section id="top-games" class="container mx-auto px-6 py-16">
+  <h2 class="text-4xl font-bold text-center text-[#66c0f4] mb-12">
+    Top 50 Games
+  </h2>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+  >
+    {% for i in range(game_title|length) %}
+    <div
+      class="group relative bg-[#2a475e] rounded-lg shadow-lg overflow-hidden hover:scale-105 transition-transform"
+    >
+      <img
+        class="w-full h-48 object-cover"
+        src="{{ game_image[i] }}"
+        alt="Game Image"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+      ></div>
+      <div class="p-4 relative z-10 text-center">
+        <h3
+          class="text-xl font-bold text-[#c7d5e0] group-hover:text-[#66c0f4]"
+        >
+          {{ game_title[i] }}
+        </h3>
+        <p class="text-sm text-gray-400">{{ game_date_release[i] }}</p>
+        <div class="mt-4">
+          <p class="text-sm">
+            User Approval:
+            <span class="font-bold text-[#66c0f4]">
+              {{ game_score[i] }}%
+            </span>
+          </p>
+          <p class="text-sm">
+            Price:
+            <span class="font-bold text-[#66c0f4]">
+              ${{ game_price[i] }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+</div>
+</body>
 </html>
