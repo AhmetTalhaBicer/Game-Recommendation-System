@@ -1,14 +1,14 @@
 # Screenshots
 
-<div class="grid grid-cols-2 gap-4">
-  <div>
-    <img src="assets/1.png" alt="Screenshot 1">
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+  <div style="border: 1px solid #ddd; padding: 10px;">
+    <img src="assets/1.png" alt="Screenshot 1" style="width: 100%;">
   </div>
-  <div>
-    <img src="assets/2.png" alt="Screenshot 2">
+  <div style="border: 1px solid #ddd; padding: 10px;">
+    <img src="assets/2.png" alt="Screenshot 2" style="width: 100%;">
   </div>
-  <div>
-    <img src="assets/3.png" alt="Screenshot 3">
+  <div style="border: 1px solid #ddd; padding: 10px;">
+    <img src="assets/3.png" alt="Screenshot 3" style="width: 100%;">
   </div>
 </div>
 
